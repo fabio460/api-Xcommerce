@@ -1,10 +1,11 @@
 import express  from "express";
 import cors from 'cors'
-
+import { routes } from "./src/rotas";
 const app  = express()
-
-app.get('/',(req,res)=>{
-    res.send('ola mundo')
+app.use(express.json())
+app.use(cors())
+routes.forEach(elem=>{
+   return app.use(elem.endpoint,elem.router)
 })
 
 app.listen(4000,()=>{console.log('servidor rodando na porta 4000 ...')})
